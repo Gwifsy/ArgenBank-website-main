@@ -12,7 +12,7 @@ const PathRoute = () => {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/sign-in" element={<Login />} />
-                <Route path="/user" element={isConnected ? <User /> : <Navigate to="/login" />} />
+                <Route path="/user" element={isConnected ? <User /> : <Navigate to="/sign-in" />} />
             </Routes>
         </BrowserRouter>
     );

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { userProfile } from '../redux/actions/user.actions';
+import { getUserProfile } from '../redux/slices/userSlice.jsx';
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
 import UserAccount from "../components/UserAccount";
@@ -22,7 +22,6 @@ const User = () => {
                     });
                     if (response.ok) {
                         const data = await response.json();
-                        console.log(data);
                         const userData = {
                             createdAt: data.body.createdAt,
                             updatedAt: data.body.updatedAt,
@@ -32,7 +31,7 @@ const User = () => {
                             lastname: data.body.lastName,
                             username: data.body.userName
                         }
-                        dispatch(userProfile(userData));
+                        dispatch(getUserProfile(userData));
                     } else {
                         console.log("error while retrieving profile");
                     }

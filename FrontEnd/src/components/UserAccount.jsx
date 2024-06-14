@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUsername } from '../redux/actions/user.actions.jsx';
+import { editUsername } from '../redux/slices/userSlice.jsx';
 import { isValidName } from "../utils/regex.jsx";
 
 const UserAccount = () => {
@@ -31,8 +31,7 @@ const UserAccount = () => {
             if (response.ok) {
                 const data = await response.json();
                 const username = data.body.userName;
-                console.log(data);
-                dispatch(updateUsername(username));
+                dispatch(editUsername(username));
                 setDisplay(!display);
             } else {
                 console.log("Invalid Fields")
@@ -62,7 +61,7 @@ const UserAccount = () => {
                                 <input
                                     type="text"
                                     id="username"
-                                    defaultValue={userData.username}
+                                    defaultValue={userData.userName}
                                     onChange={(event) => setUserName(event.target.value)}
                                 />
                             </div>

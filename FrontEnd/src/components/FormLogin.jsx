@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { loginFailed, loginSuccess } from '../redux/actions/auth.actions.jsx';
+import { loginSuccess, loginFail } from '../redux/slices/authSlice.jsx';
 import { isValidEmail, isValidPassword } from '../utils/regex.jsx';
 
 const FormLogin = () => {
@@ -24,7 +24,6 @@ const FormLogin = () => {
 
         if (response.ok) {
             const data = await response.json();
-            console.log(data)
             const token = data.body.token;
             dispatch(loginSuccess(token));
             sessionStorage.setItem("token", token);
@@ -33,7 +32,7 @@ const FormLogin = () => {
             }
             navigate('/user');
         } else {
-            dispatch(loginFailed(error));
+            dispatch(loginFail(error));
         }
     };
     return (
@@ -69,11 +68,8 @@ const FormLogin = () => {
                         />
                         <label htmlFor="remember-me">Remember me</label>
                     </div>
-                    {/* Placeholder due to static site */}
                     <button className="sign-in-button">Sign In</button>
                     {error && <p className="error-message">{error}</p>}
-                    {/* Should be the button below */}
-                    {/* <button className="sign-in-button">Sign In</button> */}
                 </form>
             </section>
         </main>

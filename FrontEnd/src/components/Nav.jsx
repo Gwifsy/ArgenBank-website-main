@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import ArgentBankLogo from "../assets/argentBankLogo.webp";
-import { logout } from "../redux/actions/auth.actions";
+import { logout } from "../redux/slices/authSlice.jsx";
 
 const Nav = () => {
     const isConnected = useSelector((state) => state.auth.token);
