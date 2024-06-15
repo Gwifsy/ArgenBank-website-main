@@ -3,12 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import ArgentBankLogo from "../assets/argentBankLogo.webp";
 import { logout } from "../redux/slices/authSlice.jsx";
-
 const Nav = () => {
     const isConnected = useSelector((state) => state.auth.token);
     const username = useSelector((state) => state.user.userData.username);
     const firstname = useSelector((state) => state.user.userData.firstname);
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const displayName = username || firstname;

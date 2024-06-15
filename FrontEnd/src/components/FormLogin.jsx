@@ -1,38 +1,26 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { loginSuccess, loginFail } from '../redux/slices/authSlice.jsx';
-import { isValidEmail, isValidPassword } from '../utils/regex.jsx';
+import { loginUser, loginFail } from '../redux/slices/authSlice';
+import { isValidEmail, isValidPassword } from '../utils/regex';
 
 const FormLogin = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [rememberMe, setRememberMe] = useState(false);
-    const [error, setError] = useState("");
-    const navigate = useNavigate();
+    const error = useSelector((state) => state.auth.error);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if (!isValidEmail(email)) return setError("Invalid email address");
-        if (!isValidPassword(password)) return setError("Invalid password");
-        const response = await fetch("http://localhost:3001/api/v1/user/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password }),
-        });
-
-        if (response.ok) {
-            const data = await response.json();
-            const token = data.body.token;
-            dispatch(loginSuccess(token));
-            sessionStorage.setItem("token", token);
-            if (rememberMe) {
-                localStorage.setItem("token", token);
-            }
+        if (!isValidEmail(email)) return dispatch(loginFail("Invalid email address"));
+        if (!isValidPassword(password)) return dispatch(loginFail("Invalid password"));
+        try {
+            await dispatch(loginUser({ email, password, rememberMe }));
             navigate('/user');
-        } else {
-            dispatch(loginFail(error));
+        } catch (error) {
+            console.error('Failed to login', error);
         }
     };
     return (
