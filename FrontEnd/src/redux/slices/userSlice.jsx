@@ -37,7 +37,7 @@ export const fetchUserProfile = createAsyncThunk(
 
 export const updateUserProfile = createAsyncThunk(
     'user/updateUserProfile',
-    async ({ userName, token }, { dispatch }) => {
+    async ({ userName, token }) => {
         try {
             const response = await fetch('http://localhost:3001/api/v1/user/profile', {
                 method: 'PUT',

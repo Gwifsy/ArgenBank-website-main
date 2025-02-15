@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 // Fonction asynchrone pour la requête de login
 export const loginUser = createAsyncThunk(
     'auth/loginUser',
-    async ({ email, password, rememberMe }, { dispatch }) => {
+    async ({ email, password, rememberMe }) => {
         try {
             const response = await fetch("http://localhost:3001/api/v1/user/login", {
                 method: "POST",
