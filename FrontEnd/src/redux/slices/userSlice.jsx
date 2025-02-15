@@ -69,16 +69,6 @@ const userSlice = createSlice({
         status: 'VOID',
         userData: {}
     },
-    reducers: {
-        getUserProfile(state, action) {
-            state.status = 'SUCCEEDED';
-            state.userData = action.payload;
-        },
-        editUsername(state, action) {
-            state.status = "MODIFIED";
-            state.userData.username = action.payload;
-        }
-    },
     extraReducers: (builder) => {
         const handleAsyncAction = (builder, action, successHandler) => {
             builder.addCase(action.pending, (state) => {

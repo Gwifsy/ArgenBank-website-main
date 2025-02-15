@@ -46,12 +46,6 @@ const authSlice = createSlice({
             state.token = null;
             state.error = null;
         },
-        loginSuccess(state, action) {
-            state.status = "SUCCEEDED";
-            state.isConnected = true;
-            state.token = action.payload;
-            state.error = null;
-        },
         loginFail(state, action) {
             state.status = "FAILED";
             state.isConnected = false;
