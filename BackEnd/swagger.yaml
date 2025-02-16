@@ -346,8 +346,10 @@ definitions:
     properties:
       transactionType:
         type: string
-      categegory:
-        type: string
+      category:
+        type: array
+        items:
+          type: string
       note:
         type: string
   LoginResponse:
@@ -364,7 +366,9 @@ definitions:
     type: object
     properties:
       category:
-        type: string
+        type: array
+        items:
+          type: string
   TransactionNote:
     type: object
     properties:

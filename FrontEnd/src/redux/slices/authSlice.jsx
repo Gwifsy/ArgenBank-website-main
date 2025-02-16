@@ -51,6 +51,14 @@ const authSlice = createSlice({
             state.isConnected = false;
             state.error = action.payload;
         },
+        initializeAuthState(state) {
+            const token = localStorage.getItem("token");
+            if (token) {
+                state.isConnected = true;
+                state.token = token;
+                state.status = "SUCCEEDED";
+            }
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(loginUser.pending, (state) => {
@@ -69,5 +77,5 @@ const authSlice = createSlice({
     },
 });
 
-export const { loginSuccess, loginFail, logout } = authSlice.actions;
+export const { loginFail, logout, initializeAuthState } = authSlice.actions;
 export default authSlice.reducer;

@@ -1,7 +1,26 @@
 import React, { useState } from "react";
+import Account from "./Account";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserProfile } from '../redux/slices/userSlice.jsx';
 import { isValidName } from "../utils/regex.jsx";
+
+const accounts = [
+    {
+        title: "Argent Bank Checking (x8349)",
+        amount: "$2,082.79",
+        description: "Available Balance",
+    },
+    {
+        title: "Argent Bank Savings (x6712)",
+        amount: "$10,928.42",
+        description: "Available Balance",
+    },
+    {
+        title: "Argent Bank Credit Card (x8349)",
+        amount: "$184.30",
+        description: "Current Balance",
+    },
+];
 
 const UserAccount = () => {
     const userData = useSelector((state) => state.user.userData);
@@ -25,10 +44,12 @@ const UserAccount = () => {
             console.error('Failed to update username', setErrorMessage);
         }
     };
+
     return (
         <main className="main bg-dark">
             <div className="header">
                 {display ?
+
                     <div>
                         <h2>Welcome back
                             <br />
@@ -76,37 +97,14 @@ const UserAccount = () => {
                     </div>
                 }
             </div>
-            <h2 className="sr-only">Accounts</h2>
-            <section className="account">
-                <div className="account-content-wrapper">
-                    <h3 className="account-title">Argent Bank Checking (x8349)</h3>
-                    <p className="account-amount">$2,082.79</p>
-                    <p className="account-amount-description">Available Balance</p>
-                </div>
-                <div className="account-content-wrapper cta">
-                    <button className="transaction-button">View transactions</button>
-                </div>
-            </section>
-            <section className="account">
-                <div className="account-content-wrapper">
-                    <h3 className="account-title">Argent Bank Savings (x6712)</h3>
-                    <p className="account-amount">$10,928.42</p>
-                    <p className="account-amount-description">Available Balance</p>
-                </div>
-                <div className="account-content-wrapper cta">
-                    <button className="transaction-button">View transactions</button>
-                </div>
-            </section>
-            <section className="account">
-                <div className="account-content-wrapper">
-                    <h3 className="account-title">Argent Bank Credit Card (x8349)</h3>
-                    <p className="account-amount">$184.30</p>
-                    <p className="account-amount-description">Current Balance</p>
-                </div>
-                <div className="account-content-wrapper cta">
-                    <button className="transaction-button">View transactions</button>
-                </div>
-            </section>
+            {accounts.map((account, index) => (
+                <Account
+                    key={index}
+                    title={account.title}
+                    amount={account.amount}
+                    description={account.description}
+                />
+            ))}
         </main>
     );
 };

@@ -93,5 +93,4 @@ const userSlice = createSlice({
     },
 });
 
-export const { getUserProfile, editUsername } = userSlice.actions;
 export default userSlice.reducer;
