@@ -282,6 +282,25 @@ paths:
           description: Note not deleted
         "500":
           description: Internal Server Error
+  /categories:
+    get:
+      summary: Retrieve all categories
+      description: Fetch all available categories
+      responses:
+        "200":
+          description: Categories retrieved successfully
+          schema:
+            $ref: "#/definitions/CategoryList"
+          examples:
+            application/json:
+              - id: 1
+                name: "Food"
+              - id: 2
+                name: "Shopping"
+              - id: 3
+                name: "Entertainment"
+        "500":
+          description: Internal Server Error
 securityDefinitions:
   Bearer:
     type: apiKey
@@ -332,6 +351,8 @@ definitions:
     items:
       type: object
       properties:
+        TransactionId:
+          type: integer
         date:
           type: string
           format: date
@@ -349,7 +370,14 @@ definitions:
       category:
         type: array
         items:
-          type: string
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+            description:
+              type: string
       note:
         type: string
   LoginResponse:
@@ -362,13 +390,25 @@ definitions:
     properties:
       userName:
         type: string
+  CategoryList:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
   TransactionCategory:
     type: object
     properties:
       category:
-        type: array
-        items:
-          type: string
+        type: string
+        description: "La catégorie de la transaction"
+        enum:
+          - "Food"
+          - "Shopping"
+          - "Entertainment"
   TransactionNote:
     type: object
     properties:
