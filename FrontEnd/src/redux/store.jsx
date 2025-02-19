@@ -1,5 +1,5 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import authSlice from "./slices/authSlice.jsx";
+import authSlice, { initializeAuthState } from "./slices/authSlice.jsx";
 import userSlice from "./slices/userSlice.jsx";
 
 const rootReducer = combineReducers({
@@ -12,4 +12,5 @@ const store = configureStore({
     devTools: true,
 });
 
+store.dispatch(initializeAuthState());
 export default store;
