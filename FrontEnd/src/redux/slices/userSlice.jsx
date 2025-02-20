@@ -19,8 +19,6 @@ export const fetchUserProfile = createAsyncThunk(
 
             const data = await response.json();
             const userProfile = {
-                createdAt: data.body.createdAt,
-                updatedAt: data.body.updatedAt,
                 id: data.body.id,
                 email: data.body.email,
                 firstname: data.body.firstName,

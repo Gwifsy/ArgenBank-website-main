@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-// Fonction asynchrone pour la requête de login
 export const loginUser = createAsyncThunk(
     'auth/loginUser',
     async ({ email, password, rememberMe }) => {
@@ -19,7 +18,6 @@ export const loginUser = createAsyncThunk(
             const data = await response.json();
             const token = data.body.token;
 
-            sessionStorage.setItem("token", token);
             if (rememberMe) {
                 localStorage.setItem("token", token);
             }

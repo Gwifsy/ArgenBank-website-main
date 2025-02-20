@@ -112,7 +112,7 @@ paths:
       parameters:
         - in: path
           name: accountId
-          type: integer
+          type: string
           required: true
           description: Numeric ID of the account to get
       produces:
@@ -137,12 +137,12 @@ paths:
       parameters:
         - in: path
           name: accountId
-          type: integer
+          type: string
           required: true
           description: Numeric ID of the account to get
         - in: path
           name: transactionId
-          type: integer
+          type: string
           required: true
           description: Numeric ID of the transaction to get
       produces:
@@ -286,6 +286,8 @@ paths:
     get:
       summary: Retrieve all categories
       description: Fetch all available categories
+      security:
+        - Bearer: []
       responses:
         "200":
           description: Categories retrieved successfully
@@ -352,7 +354,7 @@ definitions:
       type: object
       properties:
         TransactionId:
-          type: integer
+          type: string
         date:
           type: string
           format: date
@@ -373,7 +375,7 @@ definitions:
           type: object
           properties:
             id:
-              type: integer
+              type: string
             name:
               type: string
             description:
@@ -396,7 +398,7 @@ definitions:
       type: object
       properties:
         id:
-          type: integer
+          type: string
         name:
           type: string
   TransactionCategory:

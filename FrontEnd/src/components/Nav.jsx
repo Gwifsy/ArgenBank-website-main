@@ -12,7 +12,6 @@ const Nav = () => {
     const displayName = username || firstname;
     const logoutHandler = () => {
         dispatch(logout());
-        sessionStorage.clear();
         localStorage.clear();
         navigate("/");
     };
